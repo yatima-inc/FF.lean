@@ -1,4 +1,4 @@
-import FF.NewField
+import FF.PrimeField
 
 /-!
 TODO: Major items to consider before we can finally settle on this design:
@@ -239,8 +239,8 @@ open ProjectivePoint in
 instance : CurveGroup (ProjectivePoint C) C where 
   zero := infinity
   inv := fun ⟨x, y, z⟩ => ⟨x, 0 - y, z⟩ 
-  add := ProjectivePoint.add
-  double := ProjectivePoint.double
+  add := add
+  double := double
 
 open AffinePoint in
 instance : CurveGroup (AffinePoint C) C where 
@@ -252,11 +252,12 @@ instance : CurveGroup (AffinePoint C) C where
 /--
 Curve point serialisation
 -/
-class PointSerialise {F : Type _} [Field F] (C : Curve F) (K : outParam $ Type _) [CurveGroup C K] where
+class PointSerialise {F : Type _} [Field F] (C : Curve F) (K : Type _) [CurveGroup C K] where
   serialise : K → ByteArray
   deserialise : ByteArray → Option K
 
-variable {C : Curve F}
+namespace Serialise
+variable {F : Type _} [Field F] {C : Curve F}
 
 instance : PointSerialise C (AffinePoint C) where
   serialise := sorry
