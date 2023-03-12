@@ -258,11 +258,9 @@ class PointSerialise {F : Type _} [Field F] (C : Curve F) (K : outParam $ Type _
 
 variable {C : Curve F}
 
-/-
 instance : PointSerialise C (AffinePoint C) where
   serialise := sorry
   deserialise := sorry
--/
 
 instance : PointSerialise C (ProjectivePoint C) where
   serialise := sorry
