@@ -248,3 +248,22 @@ instance : CurveGroup (AffinePoint C) C where
   inv := neg
   add := add
   double := double
+
+/--
+Curve point serialisation
+-/
+class PointSerialise {F : Type _} [Field F] (C : Curve F) (K : outParam $ Type _) [CurveGroup C K] where
+  serialise : K → ByteArray
+  deserialise : ByteArray → Option K
+
+variable {C : Curve F}
+
+/-
+instance : PointSerialise C (AffinePoint C) where
+  serialise := sorry
+  deserialise := sorry
+-/
+
+instance : PointSerialise C (ProjectivePoint C) where
+  serialise := sorry
+  deserialise := sorry
