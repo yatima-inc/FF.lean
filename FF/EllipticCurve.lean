@@ -252,7 +252,7 @@ instance : CurveGroup (AffinePoint C) C where
 /--
 Curve point serialisation
 -/
-class PointSerialise {F : Type _} [Field F] (C : Curve F) (K : Type _) [CurveGroup C K] where
+class PointSerialise {F : Type _} [Field F] (C : Curve F) (K : Type _) [CurveGroup K C] where
   serialise : K → ByteArray
   deserialise : ByteArray → Option K
 
